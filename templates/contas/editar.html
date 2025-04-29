@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Conta{% endblock %}
+
+{% block content %}
+    <h2>Editar Conta</h2>
+    <form method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.descricao.label }}<br>
+            {{ form.descricao(size=30, value=conta.descricao) }}
+        </p>
+        <p>
+            {{ form.valor.label }}<br>
+            {{ form.valor(value=conta.valor) }}
+        </p>
+        <p>
+            {{ form.data_vencimento.label }}<br>
+            {{ form.data_vencimento(value=conta.data_vencimento) }}
+        </p>
+        <p>
+            {{ form.pago.label }}<br>
+            {{ form.pago(checked=conta.pago) }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
+

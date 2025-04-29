@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Planejamento Financeiro{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f6f0ff, #fde6ff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background: #6a11cb;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        nav a {
+            color: #fff;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #ffeb3b;
+        }
+        main {
+            flex: 1;
+            padding: 30px;
+            background-color: #ffffff;
+            margin: 20px auto;
+            max-width: 900px;
+            width: 90%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background: #6a11cb;
+            color: #fff;
+            font-size: 14px;
+            margin-top: auto;
+        }
+
+    /* Agora sim, estilos novos fora do footer */
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+    li {
+        background-color: #f9f9f9;
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    li strong {
+        font-size: 20px;
+        color: #333;
+    }
+    li p {
+        margin: 5px 0;
+        color: #555;
+    }
+    .progress-bar {
+        background-color: #e0e0e0;
+        border-radius: 10px;
+        overflow: hidden;
+        height: 20px;
+        margin: 10px 0;
+    }
+    .progress {
+        background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+        height: 100%;
+        color: white;
+        text-align: center;
+        font-size: 12px;
+        line-height: 20px;
+        border-radius: 10px 0 0 10px;
+    }
+    a {
+        color: #2575fc;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    form {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+    form p {
+        margin-bottom: 15px;
+    }
+    input[type="text"],
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        margin-top: 5px;
+        font-size: 14px;
+    }
+    input[type="submit"] {
+        background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s ease;
+    }
+    input[type="submit"]:hover {
+        background: linear-gradient(90deg, #2575fc 0%, #6a11cb 100%);
+    }
+    .errors {
+        color: red;
+        font-size: 12px;
+        margin: 5px 0 0 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+/* Estilo para listas de contas */
+ul {
+    list-style: none;
+    padding: 0;
+}
+li {
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+li strong {
+    font-size: 20px;
+    color: #333;
+}
+li p {
+    margin: 5px 0;
+    color: #555;
+}
+
+/* Estilo para botões dentro de formulários (ex: Marcar como Pago) */
+form button {
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+form button:hover {
+    background: linear-gradient(90deg, #2575fc 0%, #6a11cb 100%);
+}
+
+/* Estilo para os links "Editar" e "Excluir" */
+li a {
+    color: #2575fc;
+    text-decoration: none;
+    font-weight: 600;
+    margin-right: 10px;
+}
+li a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para formulários de adicionar e editar */
+form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+form p {
+    margin-bottom: 15px;
+}
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+input[type="checkbox"] {
+    margin-top: 10px;
+}
+input[type="submit"] {
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+input[type="submit"]:hover {
+    background: linear-gradient(90deg, #2575fc 0%, #6a11cb 100%);
+}
+</style>
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Meu Planejamento Financeiro</h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Metas</a> |
+            <a href="{{ url_for('adicionar') }}">Adicionar Meta</a> |
+            <a href="{{ url_for('listar_contas') }}">Contas a Pagar</a>
+        </nav>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>© {{ year }} Meu Planejamento</p>
+    </footer>
+</body>
+</html>

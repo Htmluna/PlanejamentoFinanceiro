@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Metas{% endblock %}
+
+{% block content %}
+    <h2>Minhas Metas</h2>
+    <ul>
+        {% for meta in metas %}
+            <li>
+                <strong>{{ meta.nome }}</strong>
+                <p>Valor Total: R$ {{ meta.valor_total }}</p>
+                <p>Valor Atual: R$ {{ meta.valor_atual }}</p>
+                <p>Prioridade: {{ meta.prioridade }}</p>
+                <div class="progress-bar">
+                    <div class="progress" style="width: {{ meta.progresso() }}%;">
+                        {{ meta.progresso()|round(2) }}%
+                    </div>
+                </div>
+                <a href="{{ url_for('editar', id=meta.id) }}">Editar</a> |
+                <a href="{{ url_for('excluir', id=meta.id) }}">Excluir</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('adicionar') }}">Adicionar Nova Meta</a>
+{% endblock %}

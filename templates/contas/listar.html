@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Contas a Pagar{% endblock %}
+
+{% block content %}
+    <h2>Contas a Pagar</h2>
+    <a href="{{ url_for('adicionar_conta') }}">Adicionar Conta</a>
+    <ul>
+        {% for conta in contas %}
+            <li>
+                <strong>{{ conta.descricao }}</strong>
+                <p>Valor: R$ {{ conta.valor }}</p>
+                <p>Vencimento: {{ conta.data_vencimento.strftime('%d/%m/%Y') }}</p>
+                <p>Status: {% if conta.pago %}Pago{% else %}Pendente{% endif %}</p>
+                <a href="{{ url_for('editar_conta', id=conta.id) }}">Editar</a> |
+                <a href="{{ url_for('excluir_conta', id=conta.id) }}">Excluir</a>
+
+                {% if not conta.pago %}
+                    <form action="{{ url_for('marcar_pago', id=conta.id) }}" method="post">
+                        <button type="submit">Marcar como Pago</button>
+                    </form>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
